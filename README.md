@@ -38,7 +38,7 @@ public void maxDegree()
 public void minDegree()
 ```
 
-This is very easy to calculate: just go through each key in the `people` instance variable and get the length of the associated `ArrayList` value. 
+This is very easy to calculate: just go through each key in the `people` instance variable and get the length of the associated `ArrayList` value that stores the adjacency list. Keep track of the actor (or actors) with the longest and shortest adjacency list.
 
 ### Task 2: Most "popular" actors
 In class we learned that taking a "random walk" on a graph can tell us about the relative popularity of a particular vertex. If you randomly follow edges in the graph of actors , you'll notice that you will visit some actors more often than others, no matter where you start off in the graph. We can say that those actors are more popular -- they are the Kevin Bacons of our graph. 
@@ -52,7 +52,7 @@ Write a method with the following specification:
 public void mostPopular()
 ```
 
-In the method, create a `HashMap` that maps from actors (a `String`) to a count of how many times they were visited on a random walk (an `Integer`). Then take 1000 random walks using the method I have provided. For each walk, randomly select a key from the `people` instance variable, and start at that actor. Then randomly select a path length between 1 and 100. Carry out that random walk using the provided method. After each random walk, add to your current tally for each actor in your `HashMap` variable. After 1000 walks, print out the top 5 most visited actors.
+In the method, create a `HashMap` variable that will map from actors (a `String`) to a count of how many times they were visited on a random walk (an `Integer`). Then take 1000 random walks using the method I have provided. For each walk, randomly select a key from the `people` instance variable, and start at that actor. Then randomly select a path length between 1 and 100. Carry out that random walk using the provided method. After each random walk, add to your current tally for each actor in your `HashMap` variable. After 1000 walks, print out the top 5 most visited actors.
 
 ### Task 3: Breadth-first search (`findShortestPath()`)
 You will be writing code for breadth-first search to try to connect any two actors in the graph on a shortest path. I have provided skeleton code and very detailed comments in the `SixDegrees.java` file. I've also demonstrated how to do breadth-first search in class and in example code. Have fun!
