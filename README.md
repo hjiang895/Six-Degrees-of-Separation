@@ -10,9 +10,12 @@ At long last, you have arrived at the final problem set for CS2! In this problem
 
 In this graph of actors from the 999 most popular movies from 2006 to 2016, each vertex is an actor, and each edge is movie that unites that actor with another actor. Below is a visualization of a subgraph of this graph:
 
-
+![picture](imdb.png)
 
 The graph is implemented as an adjacency list. A `HashMap` object called `people` maps a `String` key (an actor's name) to a value that is an `ArrayList` of `PersonMovie` objects. The `ArrayList` is the adjacency list for that actor. Each `PersonMovie` object in the `ArrayList` stores the name of an actor and a movie that actor was in with the key actor. Thus, for every actor, we know every other actor they starred with and the name of the movie (or movies) that brough them together. This picture might make things a bit clearer. 
+
+![diagram](diagram.png)
+
 
 Note that the same actor can appear twice in a key's adjacency list if that actor appeared in multiple movies with the key actor. For instance, the adjacency list for Christian Bale would include a `PersonMovie` object for when he starred with Amy Adams in "American Hustle" and a `PersonMovie` object for when he starred with Amy Adams in "The Fighter".
 
