@@ -66,8 +66,13 @@ In the main method, I've provided some calls to the existing methods and some co
 
 --- 
 
-## Submission instructions
+## Important notes on grading
 
+1. You should submit only the files that are already in the repo. 
+
+2. Your code must compile. If you can't get something to compile, comment it out and explain what you were doing so we can try to give you partial credit.
+
+3. Comment your code and indent propertly. This will be worth 10% of your grade on this problem set (i.e., 1 point).
 
 
 
