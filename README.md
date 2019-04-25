@@ -24,7 +24,7 @@ Detailed comments about the implementation can be found in the `SixDegrees.java`
 ---
 ## Tasks
 
-Your tasks, which increase in difficulty from the first to the last, are set out below. I have written a lot of the code for you, and it is well commented. 
+Your tasks, which increase in difficulty from the first to the last, are set out below. I have written a lot of the code for you, and it is well commented. **Look in the `SixDegree.java` file for where to carry out these four tasks!**
 
 
 ### Task 1: Max and min degree
