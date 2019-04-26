@@ -52,17 +52,13 @@ Write a method with the following specification:
 public void mostPopular()
 ```
 
-In the method, create a `HashMap` variable that will map from actors (a `String`) to a count of how many times they were visited on a random walk (an `Integer`). Then take 1000 random walks using the method I have provided. For each walk, randomly select a key from the `people` instance variable, and start at that actor. Then randomly select a path length between 1 and 100. Carry out that random walk using the provided method. After each random walk, add to your current tally for each actor in your `HashMap` variable. After 1000 walks, print out the top 5 most visited actors.
+In the method, create a `HashMap` variable that will map from actors (a `String`) to a count of how many times they were visited on a random walk (an `Integer`). Then take 10000 random walks using the method I have provided. For each walk, randomly select a key from the `people` instance variable, and start at that actor. (I have provided code for selecting a random key from a `HashMap`.) Then take a random walk with 100 steps starting from that actor, using the provided method. After each random walk, add to your current tally for each actor in your `HashMap` variable. After 10000 walks, print out the top 5 most visited actors.
 
 ### Task 3: Breadth-first search (`findShortestPath()`)
 You will be writing code for breadth-first search to try to connect any two actors in the graph on a shortest path. I have provided skeleton code and very detailed comments in the `SixDegrees.java` file. I've also demonstrated how to do breadth-first search in class and in example code. Have fun!
 
 ### Task 4: `main()` method and finding exceptional paths
-In the main method, I've provided some calls to the existing methods and some commented-out calls to the methods you'll be writing in tasks 1, 2, and 3. Uncomment these commented-out calls to verify that your code works. Then use your code from Task 3 to try to answer these questions:
-
-* Can you find two actors whose shortest path is longer than 4? Put a call in your main method to `findShortestPath()` with any pairs of actors you find (if any) that meet these criteria. 
-* What is the longest path you can find between two actors? Put a call in your main method to `findShortestPath()` with the pair of actors whose path is very long.
-* Can you find any pair of actors that are not connected at all? Put a call in your main method to `findShortestPath()` with any pairs of actors you find (if any) that meet these criteria.
+In the main method, I've provided some calls to the existing methods and some commented-out calls to the methods you'll be writing in tasks 1, 2, and 3. Uncomment these commented-out calls to verify that your code works. Then use your code from Task 3 to try to answer this questions. What is the longest path you can find between two actors? Put a call in your main method to `findShortestPath()` with the pair of actors whose path greater than at least 4.
 
 --- 
 
