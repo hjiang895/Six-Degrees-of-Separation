@@ -58,7 +58,7 @@ In the method, create a `HashMap` variable that will map from actors (a `String`
 You will be writing code for breadth-first search to try to connect any two actors in the graph on a shortest path. I have provided skeleton code and very detailed comments in the `SixDegrees.java` file. I've also demonstrated how to do breadth-first search in class and in example code. Have fun!
 
 ### Task 4: `main()` method and finding exceptional paths
-In the main method, I've provided some calls to the existing methods and some commented-out calls to the methods you'll be writing in tasks 1, 2, and 3. Uncomment these commented-out calls to verify that your code works. Then use your code from Task 3 to try to answer this questions. What is the longest path you can find between two actors? Put a call in your main method to `findShortestPath()` with the pair of actors whose path greater than at least 4.
+In the main method, I've provided some calls to the existing methods and some commented-out calls to the methods you'll be writing in tasks 1, 2, and 3. Uncomment these commented-out calls to verify that your code works. Then use your code from Task 3 to try to answer this question: what is the longest (acyclic) path you can find between two actors? Look at the data file and use your code to find an answer. Then put a call in your main method to `findShortestPath()` with the pair of actors whose path was the longest you were able to find.
 
 --- 
 
