@@ -141,9 +141,48 @@ public class SixDegrees {
   // signature: public void maxDegree()
   // Instructions are in the problem set.
 
+  public void maxDegree(){
+    // Initializes maxKey with null and max with an impossible value
+    String maxKey = null;
+    int max = -1;
+    for(String actor : people.keySet()){
+      // On first iteration, sets maxKey/max to values from first actor
+      if (max == -1) {
+        max = people.get(actor).size();
+        maxKey = actor;
+      }
+      // After first iteration, changes maxKey/max only if degree exceeds current min
+      else if(people.get(actor).size() > max){
+        max = people.get(actor).size();
+        maxKey = actor;
+      }
+    }
+    System.out.println(maxKey);
+    System.out.println(max);
+  }
+
   // TASK 1: print out the actor(s) with the minimum degree
   // signature: public void minDegree()
   // Instructions are in the problem set.
+  public void minDegree(){
+    // Initializes minKey with null and min with an impossible value
+    String minKey = null;
+    int min = -1;
+    for(String actor : people.keySet()){
+      // On first iteration, sets minKey/min to values from first actor
+      if (min == -1) {
+        min = people.get(actor).size();
+        minKey = actor;
+      }
+      // After first iteration, changes minKey/min only if degree is below the current min
+      else if(people.get(actor).size() <= min){
+        min = people.get(actor).size();
+        minKey = actor;
+      }
+    }
+    System.out.println(minKey);
+    System.out.println(min);
+  }
 
   // TASK 2: print out the 5 most popular actors based on number of visits in a random walk
   // signature: public void mostPopular()
@@ -151,59 +190,101 @@ public class SixDegrees {
   // Note: this code will pick a random actor from the people HashMap and save it to key.
   //       ArrayList<String> allActors = new ArrayList<String>(people.keySet());
   //       String key = allActors.get(new Random().nextInt(allActors.size()));
+  public void mostPopular(){
+    HashMap<String, Integer> actorCount = new HashMap<String, Integer>();
+
+    // Adds every actor to a new HashMap with an initial number of visits as 0
+    for(String k: people.keySet()){
+      actorCount.put(k, 0);
+    }
+    // Runs 10000 random walks and adds 1 to every reached actor's value in acterCount
+    for(int count = 1; count <= 10000; count++){
+      ArrayList<String> allActors = new ArrayList<String>(people.keySet());
+      String key = allActors.get(new Random().nextInt(allActors.size()));
+      ArrayList<String> reachedActor = randomWalk(key, 100);
+
+      for (String reached : reachedActor) {
+        actorCount.replace(reached, actorCount.get(reached) + 1);
+      }
+    }
+
+    // Finds the five most reached actors
+    for (int removed = 0; removed < 5; removed++) {
+      int max = 0;
+      String maxKey = "";
+      // Iterates through all remaining actors to find the most reached remaining actor
+      for (String actor : actorCount.keySet()) {
+        if (actorCount.get(actor) > max) {
+          maxKey = actor;
+          max = actorCount.get(actor);
+        }
+      }
+      // Prints the name of the actor and removes them from the HashMap
+      System.out.println(maxKey);
+      actorCount.remove(maxKey);
+    }
+  }
 
   // TASK 3: Find the shortest path between two actors using breadth-first search.
   // You need to print out the full path from actor a to actor b.
   // You also need to keep track of the length of the path.
   // The algorithm is set out for you below.
-    public void findShortestPath(String a, String b) {
-
-    // For each actor you encounter, keep track of how you got there
-    // (i.e., from which PersonMovie, i.e., which other actor and what movie).
-    // You also use this to keep track of which actors you have visited.
-    HashMap<String,PersonMovie> camefrom = new HashMap<String,PersonMovie>();
-
-    // In BFS, you use a queue. I know this is confusing, but the appropriate
-    // implementation of the Queue interface in Java is called LinkedList.
+  public void findShortestPath(String a, String b) {
+    HashMap<String, PersonMovie> camefrom = new HashMap<String, PersonMovie>();
     LinkedList<String> queue = new LinkedList<String>();
 
-    // YOUR CODE GOES HERE!
-    // Start by adding the starting actor, a, to the queue.
+    queue.add(a);
 
-    // While the queue is not empty
-
+    while (queue.size() != 0) {
       // poll() off the actor at the front of the queue.
-
+      String current = queue.poll();
       // Get the adjacency list for that actor.
-
+      ArrayList<PersonMovie> al = people.get(current);
       // For each PersonMovie in the adjacency list...
-
+      for (PersonMovie pm : al) {
         // If the actor in the PersonMovie is the actor, b, you are looking for.
-
-          // If it is, you are ready to print out the path that took you here.
-          // You must also print out its length.
-          // Use the camefrom variable to help you do this.
-          // Don't forget to return!!!
-
-
-
-        // Otherwise...
-
-          // If that actor has already been visited or is in the queue...
-
+        if (pm.person.equals(b)) {
+          String person = current;
+          ArrayList<String> path = new ArrayList<String>();
+          // Add the last and second-to-last value to the path, then
+          // iterate through and add the rest.
+          path.add(0, b);
+          path.add(0, person);
+          int length = 2;
+          while (!person.equals(a)) {
+            person = camefrom.get(person).person;
+            path.add(0, person);
+            length++;
+          }
+          // Print out the path to b as well as its length.
+          System.out.println("Length of path " + length);
+          for (String s : path) {
+            System.out.println(s);
+          }
+          return;
+        }
+        else {
+          // If that actor has not already been visited and is not in the queue...
+          if (!queue.contains(pm.person) && !camefrom.containsKey(pm.person)) {
             // Add that actor to the queue.
-
+            queue.add(pm.person);
             // And add that actor to camefrom with the current actor
             // and the movie that they were in together as the value.
-
+            camefrom.put(pm.person, new PersonMovie(current, pm.movie));
+          }
+        }
+      }
+    }
     // If you end up with an empty queue and no match, there was no path.
+    return;
   }
+
 
 
   // --------------------------------
   // MAIN METHOD
   // --------------------------------
-  public static void main (String[] args) throws IOException {
+  public static void main(String[] args) throws IOException {
     SixDegrees sd = new SixDegrees();
     sd.populateGraph(args[0]);
     sd.randomWalk("Kevin Bacon", 5);
@@ -211,17 +292,27 @@ public class SixDegrees {
     // -------------------------------------------
     // UNCOMMENT THESE TO TEST YOUR IMPLEMENTATION
     // -------------------------------------------
-    // sd.maxDegree();
-    // sd.minDegree();
-    // sd.mostPopular()
-    // sd.findShortestPath("Pablo Schreiber", "Sarah Clarke");
+    System.out.println("Max degree: ");
+    sd.maxDegree();
+    System.out.println();
 
+    System.out.println("Min degree: ");
+    sd.minDegree();
+    System.out.println();
+
+    System.out.println("Most popular: ");
+    sd.mostPopular();
+    System.out.println();
+
+    System.out.println("Shortest path: ");
+    sd.findShortestPath("Pablo Schreiber", "Sarah Clarke");
+    System.out.println();
 
     // ---------------------------
     // CODE FOR TASK 4 GOES HERE!
     // ---------------------------
-
-
+    System.out.println("Longest shortest path: ");
+    sd.findShortestPath("Dong-seok Ma", "Kim Cattrall");
+    System.out.println();
   }
-
 }
